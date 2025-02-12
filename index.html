@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlenius Consulting</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #555;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            background-color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            height: 120px;
+        }
+        .logo img {
+            height: 60px;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #666;
+            font-weight: bold;
+        }
+        
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: left;
+            color: black;
+            font-size: 32px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            margin-top: 120px;
+            width: 100%; /* Ensure it doesn't exceed the viewport */
+        }
+
+        .hero img {
+            position: absolute;
+            width: 100%; /* Avoid exceeding the viewport */
+            height: 100%;
+            object-fit: cover;
+            left: 0;
+            opacity: 0;
+            animation: fade 9s infinite;
+        }
+        @keyframes fade {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            40% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        .hero img:nth-child(1) { animation-delay: 0s; }
+        .hero img:nth-child(2) { animation-delay: 3s; }
+        .hero img:nth-child(3) { animation-delay: 6s; }
+        .hero div {
+            align-content: left;
+            position: absolute;
+            z-index: 10;
+            padding: 20px;
+            left: 10%;
+            top: 30%;
+            transform: translateY(-50%);
+            background: transparent;
+        }
+        .content-box {
+            background-color: #f9f9f9;
+            width: 100%;
+        }
+        .content {
+            text-align: center;
+            padding: 50px;
+            background-color: #f9f9f9;
+            flex-grow: 1;
+            margin: 0 auto;
+        }
+        .contact {
+            text-align: center;
+            padding: 50px;
+            background-color: #808080;
+            color: #f9f9f9;
+            flex-grow: 1;
+            width: 100%;
+        }
+        .contact h2 {
+            margin-bottom: 20px; /* Adds space between title and text */
+        }
+
+        .contact .info-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px; /* Adds space between each item */
+        }
+
+        .contact p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .contact span {
+            font-weight: normal;
+        }
+
+        footer {
+            background-color: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            width: 100%;
+        }
+        p.big {
+            line-height: 2;
+        }
+        h2.big {
+            line-height: 3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="Logowithname.jpg" alt="Company Logo"></div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="https://github.com/kristiancarlenius">GitHub</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <div class="hero">
+        <img src="image1.jpg" alt="Placeholder Image 1">
+        <img src="image2.jpg" alt="Placeholder Image 2">
+        <img src="image3.jpg" alt="Placeholder Image 3">
+        <div>
+            Tailor made software solutions<br>
+            <span style="font-size: 18px; font-weight: normal;">Developing automation and AI solutions for your business</span>
+        </div>
+    </div>
+    <div id="about" class="content-box">
+        <div class="content">
+            <h2 class="big">About Us</h2>
+            <p class="big">Carlenius Consulting is a cutting-edge software development company specializing <br> 
+                in tailor-made solutions for businesses in automation and artificial intelligence. <br>
+                With a strong focus on innovation and efficiency, Carlenius Consulting delivers <br>
+                high-performance software that optimizes workflows, enhances decision-making, <br>
+                and drives digital transformation. Whether developing intelligent automation <br>
+                systems or predictive modelling, we ensure customized solutions that align <br>
+                with each client’s unique needs, helping them stay ahead.</p>
+        </div>
+    </div>
+    
+    <div id="contact" class="contact">
+        <h2>Contact Info</h2>
+        <div class="info-container">
+            <p>Tlf. number: <span>+47 95 48 31 29</span></p>
+            <p>Location: <span>Asker, Norway</span></p>
+            <p>E-mail: <span>contact@carleniusconsulting.no</span></p>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Carlenius Consulting | All Rights Reserved
+    </footer>
+</body>
+</html>
