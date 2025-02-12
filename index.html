@@ -1,5 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".hero img");
+            const textOverlay = document.querySelector(".hero-text");
+    
+            function getBrightness(img) {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                
+                const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                const data = imageData.data;
+                let brightness = 0, count = 0;
+    
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    brightness += (r * 0.299 + g * 0.587 + b * 0.114);
+                    count++;
+                }
+                return brightness / count;
+            }
+    
+            function updateTextColor() {
+                images.forEach((img) => {
+                    if (window.getComputedStyle(img).opacity === "1") {
+                        const brightness = getBrightness(img);
+                        textOverlay.style.color = brightness > 128 ? "#000" : "#fff"; // Black for bright, white for dark
+                    }
+                });
+            }
+    
+            setInterval(updateTextColor, 1000); // Check every second
+        });
+    </script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -157,11 +195,11 @@
         <img src="image1.jpg" alt="Placeholder Image 1">
         <img src="image2.jpg" alt="Placeholder Image 2">
         <img src="image3.jpg" alt="Placeholder Image 3">
-        <div>
+        <div class="hero-text">
             Tailor made software solutions<br>
             <span style="font-size: 18px; font-weight: normal;">Developing automation and AI solutions for your business</span>
         </div>
-    </div>
+    </div>    
     <div id="about" class="content-box">
         <div class="content">
             <h2 class="big">About Us</h2>
