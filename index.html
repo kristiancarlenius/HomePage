@@ -1,43 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const images = document.querySelectorAll(".hero img");
-        const textOverlay = document.querySelector(".hero-text");
-
-        function getBrightness(img) {
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0, img.width, img.height);
-            
-            const imageData = ctx.getImageData(0, 0, img.width, img.height);
-            const data = imageData.data;
-            let brightness = 0, count = 0;
-
-            for (let i = 0; i < data.length; i += 4) {
-                const r = data[i];
-                const g = data[i + 1];
-                const b = data[i + 2];
-                brightness += (r * 0.299 + g * 0.587 + b * 0.114);
-                count++;
-            }
-            return brightness / count;
-        }
-
-        function updateTextColor() {
-            images.forEach((img) => {
-                if (window.getComputedStyle(img).opacity === "1") {
-                    const brightness = getBrightness(img);
-                    textOverlay.style.color = brightness > 128 ? "#000" : "#fff"; // Black for bright, white for dark
-                }
-            });
-        }
-
-        setInterval(updateTextColor, 1000); // Check every second
-    });
-</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,10 +55,10 @@
             left: 10%;
             top: 40%;
             transform: translateY(-50%);
-            background-color: rgba(128, 128, 128, 0.8); /* Semi-transparent gray background */
-            border-radius: 10px; /* Rounded corners */
-            backdrop-filter: blur(5px); /* Slight blur effect */
-            color: white;
+            background-color: rgba(80, 80, 80, 0.8); /* Semi-transparent gray background */
+            border-radius: 6px; /* Rounded corners */
+            backdrop-filter: blur(7px); /* Slight blur effect */
+            color: rgb(246, 243, 243);
             text-align: left;
             display: flex;
             flex-direction: column;
