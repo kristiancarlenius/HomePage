@@ -1,246 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carlenius AI</title>
-    <link rel="icon" type="image/x-icon" href="icon.jpeg">
-    <style>
-    html {
-        scroll-behavior: smooth;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carlenius AI</title>
+<link rel="icon" type="image/x-icon" href="icon.jpeg">
 
-    :root {
-        --bg-main: #000000;
-        --bg-secondary: #000000;
-        --bg-tertiary: #1f1f1f;
-        --bg-header: #000000;
+<!-- Hacker / cyber style font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 
-        --text-main: #0ead00;
-        --text-muted: #0ead00;
-        --text-accent: #0ead00;
+<style>
+/* ------------------ ROOT ------------------ */
+:root {
+    --bg-main: #050505;
+    --bg-glass: rgba(20, 20, 20, 0.65);
 
-        --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.6);
-        --border-subtle: rgba(255, 255, 255, 0.08);
-    }
+    --accent: #0ead00;
+    --accent-soft: rgba(14, 173, 0, 0.35);
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
+    --text-main: #e6ffe9;
+}
 
-    body {
-        background-color: var(--bg-main);
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        color: var(--text-main);
-        overflow-x: hidden;
-    }
+/* ------------------ RESET ------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 30px 50px;
-        background-color: var(--bg-header);
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        height: 120px;
-        box-shadow: var(--shadow-soft);
-        border-bottom: 1px solid var(--border-subtle);
-    }
+html {
+    scroll-behavior: smooth;
+}
 
-    .logo img {
-        height: 125px;
-    }
+body {
+    background: radial-gradient(circle at top, #0a0f0a, #000);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
 
-    nav a {
-        margin: 0 15px;
-        text-decoration: none;
-        color: var(--text-muted);
-        font-weight: bold;
-        font-size: 21px;
-        transition: color 0.2s ease;
-    }
+/* ------------------ CYBER FONT (HEADINGS + NAV ONLY) ------------------ */
+.cyber-font {
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
+}
 
-    nav a:hover {
-        color: var(--text-accent);
-    }
+/* ------------------ HEADER ------------------ */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 110px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 1000;
+}
 
-    .hero {
-        height: 80vh;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        position: relative;
-        overflow: hidden;
-        margin-top: 120px;
-        width: 100%;
-    }
+.logo img {
+    height: 95px;
+}
 
-    .hero img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        left: 0;
-        opacity: 0;
-        z-index: 1;
-        animation: fade 9s infinite;
-        filter: brightness(0.6);
-    }
+/* ------------------ NAV ------------------ */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
 
-    @keyframes fade {
-        0% { opacity: 0; }
-        10% { opacity: 1; }
-        40% { opacity: 1; }
-        50% { opacity: 0; }
-        100% { opacity: 0; }
-    }
+nav a {
+    position: relative;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
 
-    .hero img:nth-child(1) { animation-delay: 0s; }
-    .hero img:nth-child(2) { animation-delay: 3s; }
-    .hero img:nth-child(3) { animation-delay: 6s; }
+    text-shadow:
+        0 0 3px rgba(14, 173, 0, 0.5),
+        0 0 8px rgba(14, 173, 0, 0.25);
 
-    .hero-text {
-        font-size: 48px;
-        font-weight: bold;
-        position: absolute;
-        z-index: 10;
-        padding: 30px;
-        left: 10%;
-        top: 40%;
-        transform: translateY(-50%);
-        backdrop-filter: blur(25px);
-        background-color: rgba(15, 17, 21, 0.75);
-        border-radius: 6px;
-        color: var(--text-accent);
-        max-width: 50%;
-        box-shadow: var(--shadow-soft);
-    }
+    transition: text-shadow 0.25s ease;
+}
 
-    .hero-text span {
-        font-size: 18px;
-        font-weight: normal;
-        color: var(--text-muted);
-    }
+/* TEXT WRAPPER */
+nav a span {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
 
-    .content-box {
-        background-color: var(--bg-secondary);
-        width: 100%;
-    }
+/* UNDERLINE (OFFSET UNDER FIRST LETTER) */
+nav a span::after {
+    content: '';
+    position: absolute;
+    left: 3px;                 /* ⬅️ underline starts slightly right */
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent-soft);
+    transition: width 0.3s ease;
+}
 
-    .content {
-        text-align: center;
-        padding: 60px 50px;
-        background-color: var(--bg-secondary);
-        margin: 0 auto;
-    }
+nav a:hover span::after {
+    width: calc(100% - 6px);
+}
 
-    h2 {
-        color: var(--text-accent);
-    }
+/* VERTICAL SEPARATORS */
+nav a + a {
+    padding-left: 30px;
+}
 
-    p {
-        color: var(--text-muted);
-    }
+nav a + a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 64px;
+    background: rgba(14, 173, 0, 0.6);
+    pointer-events: none;
+}
 
-    .contact {
-        text-align: center;
-        padding: 60px 50px;
-        background-color: var(--bg-tertiary);
-        color: var(--text-main);
-        width: 100%;
-    }
+/* HOVER */
+nav a:hover span {
+    transform: scale(1.08);
+}
 
-    .contact h2 {
-        margin-bottom: 25px;
-    }
+nav a:hover {
+    text-shadow:
+        0 0 10px rgba(0, 255, 102, 0.9),
+        0 0 25px rgba(0, 255, 102, 0.7),
+        0 0 45px rgba(0, 255, 102, 0.4);
+}
 
-    .contact .info-container {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        flex-wrap: wrap;
-    }
+/* ------------------ HERO ------------------ */
+.hero {
+    height: 100vh;
+    position: relative;
+    margin-top: 110px;
+    overflow: hidden;
+}
 
-    .contact p {
-        margin: 0;
-        font-weight: bold;
-        color: var(--text-main);
-    }
+.hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: fade 12s infinite;
+    opacity: 0;
+    filter: brightness(0.45);
+}
 
-    .contact span {
-        font-weight: normal;
-        color: var(--text-muted);
-    }
+.hero img:nth-child(1) { animation-delay: 0s; }
+.hero img:nth-child(2) { animation-delay: 4s; }
+.hero img:nth-child(3) { animation-delay: 8s; }
 
-    footer {
-        background-color: #090b10;
-        color: var(--text-muted);
-        text-align: center;
-        padding: 20px;
-        margin-top: auto;
-        width: 100%;
-        border-top: 1px solid var(--border-subtle);
-    }
+@keyframes fade {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    35% { opacity: 1; }
+    45% { opacity: 0; }
+    100% { opacity: 0; }
+}
 
-    p.big {
-        line-height: 2;
-    }
+/* ------------------ HERO TEXT ------------------ */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    max-width: 600px;
+    padding: 40px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(25px);
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 60px var(--accent-soft);
+    animation: float 6s ease-in-out infinite;
+}
 
-    h2.big {
-        line-height: 3;
-    }
+@keyframes float {
+    0%,100% { transform: translateY(-50%) translateX(0); }
+    50% { transform: translateY(-52%) translateX(4px); }
+}
+
+.hero-text h1 {
+    font-size: 52px;
+    line-height: 1.2;
+    color: var(--accent);
+}
+
+.hero-text span {
+    display: block;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+/* ------------------ CONTENT ------------------ */
+.section {
+    padding: 100px 60px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    color: var(--accent);
+}
+
+.section p {
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--accent);
+}
+
+/* ------------------ CONTACT ------------------ */
+.contact {
+    background: linear-gradient(180deg, #050505, #020202);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+}
+
+.contact .cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.card {
+    background: var(--bg-glass);
+    padding: 30px 40px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    min-width: 250px;
+    box-shadow: 0 0 30px rgba(0,255,102,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 60px rgba(0,255,102,0.3);
+}
+
+.card strong {
+    display: block;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+/* ------------------ FOOTER ------------------ */
+footer {
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
 </style>
-
 </head>
+
 <body>
-    <header>
-        <div class="logo"><img src="Logowithname.jpg" alt="Company Logo"></div>
-        <nav>
-            <a href="#about">About</a>
-            <a href="https://github.com/kristiancarlenius">GitHub</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    <div class="hero">
-        <img src="image1.jpg" alt="Placeholder Image 1">
-        <img src="image2.jpg" alt="Placeholder Image 2">
-        <img src="image3.jpg" alt="Placeholder Image 3">
-        <div class="hero-text">
-            Tailor made software solutions<br>
-            <span style="font-size: 18px; font-weight: normal;">Developing AI and automation solutions for your business</span>
+
+<header>
+    <div class="logo">
+        <a href="#">
+            <img src="Logowithname.jpg" alt="Carlenius AI Logo">
+        </a>
+    </div>
+
+    <nav>
+        <a href="#about" class="cyber-font"><span>About</span></a>
+        <a href="https://github.com/kristiancarlenius" class="cyber-font"><span>GitHub</span></a>
+        <a href="#contact" class="cyber-font"><span>Contact</span></a>
+    </nav>
+</header>
+
+<section class="hero">
+    <img src="image1.jpg">
+    <img src="image2.jpg">
+    <img src="image3.jpg">
+
+    <div class="hero-text">
+        <h1 class="cyber-font">Tailor-Made<br>Software Solutions</h1>
+        <span>AI & automation engineered to scale your business</span>
+    </div>
+</section>
+
+<section id="about" class="section">
+    <h2 class="cyber-font">About Carlenius AI</h2>
+    <p>
+        Carlenius AI is a high-end software consultancy specializing in artificial intelligence,
+        automation, and data-driven systems. We design and implement intelligent solutions that
+        streamline workflows, enhance decision-making, and dramatically reduce human workload.
+        <br><br>
+        From computer vision and predictive modeling to fully automated pipelines, every solution
+        is custom-built to give your business a competitive edge.
+    </p>
+</section>
+
+<section id="contact" class="section contact">
+    <h2 class="cyber-font">Contact</h2>
+    <div class="cards">
+        <div class="card">
+            <strong>Phone</strong>
+            +47 95 48 31 29
         </div>
-    </div>    
-    <div id="about" class="content-box">
-        <div class="content">
-            <h2 class="big">About Us</h2>
-            <p class="big">Carlenius AI is a cutting-edge software development company specializing <br> 
-                in tailor-made solutions for businesses in artificial intelligence and automation. <br>
-                With a strong focus on implementation and efficiency, Carlenius AI delivers <br>
-                high-performance software that optimizes workflows, enhances decision-making, <br>
-                and minimize human workloads. Whether developing intelligent automation <br>
-                systems, computer vision based detection or predictive modelling, we ensure customized <br>
-                solutions that align with each client’s unique needs, helping them stay ahead.</p>
+        <div class="card">
+            <strong>Location</strong>
+            Asker, Norway
+        </div>
+        <div class="card">
+            <strong>Email</strong>
+            contact@carleniusai.no
         </div>
     </div>
-    
-    <div id="contact" class="contact">
-        <h2>Contact Info</h2>
-        <div class="info-container">
-            <p>Tlf. number: <span>+47 95 48 31 29</span></p>
-            <p>Location: <span>Asker, Norway</span></p>
-            <p>E-mail: <span>contact@carleniusai.no</span></p>
-        </div>
-    </div>
-    <footer>
-        &copy; 2026 Carlenius AI | All Rights Reserved
-    </footer>
+</section>
+
+<footer>
+    © 2026 Carlenius AI — All Rights Reserved
+</footer>
+
 </body>
 </html>
+
