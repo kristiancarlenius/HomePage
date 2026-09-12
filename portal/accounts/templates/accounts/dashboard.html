@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Carlenius AI Portal{% endblock %}
+{% block content %}
+<h1>Welcome, {{ user.first_name|default:user.username }}</h1>
+<div class="card">
+    <p>Use the navigation above to get to the shared calendar, customer notes, your hours, and the repo directory.</p>
+    {% if user.is_staff %}<p>As an admin, you also have access to the <a href="{% url 'billing' %}">Billing</a> rollup.</p>{% endif %}
+</div>
+{% endblock %}

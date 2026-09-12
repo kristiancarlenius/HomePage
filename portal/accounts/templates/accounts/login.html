@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Log in - Carlenius AI Portal{% endblock %}
+{% block content %}
+<div class="card" style="max-width:400px;margin:60px auto;">
+    <h2>Log in</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn" type="submit">Log in</button>
+    </form>
+</div>
+{% endblock %}

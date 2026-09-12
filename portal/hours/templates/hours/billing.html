@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Billing{% endblock %}
+{% block content %}
+<h1>Billing rollup</h1>
+<form method="get" class="card">
+    <label>From <input type="date" name="start" value="{{ start }}"></label>
+    <label>To <input type="date" name="end" value="{{ end }}"></label>
+    <button class="btn" type="submit">Filter</button>
+    <a class="btn secondary" href="{% url 'billing_csv' %}?start={{ start }}&end={{ end }}">Export CSV</a>
+</form>
+<table class="portal-table">
+    <thead><tr><th>User</th><th>Customer</th><th>Total hours</th></tr></thead>
+    <tbody>
+    {% for row in rollup %}
+        <tr>
+            <td>{{ row.user__username }}</td>
+            <td>{{ row.customer__name|default:"-" }}</td>
+            <td>{{ row.total_hours }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="3">No entries in this range.</td></tr>
+    {% endfor %}
+    </tbody>
+    <tfoot><tr><td colspan="2"><strong>Grand total</strong></td><td><strong>{{ grand_total }}</strong></td></tr></tfoot>
+</table>
+{% endblock %}

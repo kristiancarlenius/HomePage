@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Delete entry{% endblock %}
+{% block content %}
+<div class="card" style="max-width:500px;">
+    <h1>Delete entry from {{ entry.date }} ({{ entry.hours }}h)?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn" type="submit">Yes, delete</button>
+        <a class="btn secondary" href="{% url 'entry_edit' entry.pk %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

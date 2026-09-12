@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ customer.name }}{% endblock %}
+{% block content %}
+<div style="display:flex;justify-content:space-between;align-items:center;">
+    <h1>{{ customer.name }}</h1>
+    <a class="btn secondary" href="{% url 'customer_edit' customer.pk %}">Edit</a>
+</div>
+<div class="card">
+    <p><strong>Rate:</strong> {{ customer.rate|default:"-" }}</p>
+    <p><strong>Contact info:</strong><br>{{ customer.contact_info|linebreaksbr|default:"-" }}</p>
+</div>
+<div class="card">
+    <h3>Projects done</h3>
+    <p>{{ customer.projects_done|linebreaksbr|default:"-" }}</p>
+</div>
+<div class="card">
+    <h3>Potential needs</h3>
+    <p>{{ customer.potential_needs|linebreaksbr|default:"-" }}</p>
+</div>
+<div class="card">
+    <h3>Known issues</h3>
+    <p>{{ customer.known_issues|linebreaksbr|default:"-" }}</p>
+</div>
+<div class="card">
+    <h3>Notes</h3>
+    <p>{{ customer.notes|linebreaksbr|default:"-" }}</p>
+</div>
+{% endblock %}

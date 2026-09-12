@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{% if customer %}Edit{% else %}New{% endif %} Customer{% endblock %}
+{% block content %}
+<div class="card" style="max-width:600px;">
+    <h1>{% if customer %}Edit {{ customer.name }}{% else %}New customer{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn" type="submit">Save</button>
+        <a class="btn secondary" href="{% url 'customer_list' %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

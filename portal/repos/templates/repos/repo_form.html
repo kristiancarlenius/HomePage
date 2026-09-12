@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{% if repo %}Edit{% else %}Add{% endif %} Repo{% endblock %}
+{% block content %}
+<div class="card" style="max-width:500px;">
+    <h1>{% if repo %}Edit repo{% else %}Add repo{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn" type="submit">Save</button>
+        <a class="btn secondary" href="{% url 'repo_list' %}">Cancel</a>
+        {% if repo %}<a class="btn secondary" href="{% url 'repo_delete' repo.pk %}">Delete</a>{% endif %}
+    </form>
+</div>
+{% endblock %}

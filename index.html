@@ -6,11 +6,10 @@
 <title>Carlenius AI</title>
 <link rel="icon" type="image/x-icon" href="icon.jpeg">
 
-<!-- Hacker / cyber style font -->
+<!-- cyber theme font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ------------------ ROOT ------------------ */
 :root {
     --bg-main: #050505;
     --bg-glass: rgba(20, 20, 20, 0.65);
@@ -21,7 +20,6 @@
     --text-main: #e6ffe9;
 }
 
-/* ------------------ RESET ------------------ */
 * {
     margin: 0;
     padding: 0;
@@ -39,13 +37,11 @@ body {
     overflow-x: hidden;
 }
 
-/* ------------------ CYBER FONT (HEADINGS + NAV ONLY) ------------------ */
 .cyber-font {
     font-family: "Orbitron", sans-serif;
     letter-spacing: 1px;
 }
 
-/* ------------------ HEADER ------------------ */
 header {
     position: fixed;
     top: 0;
@@ -65,7 +61,6 @@ header {
     height: 95px;
 }
 
-/* ------------------ NAV ------------------ */
 nav {
     display: flex;
     align-items: center;
@@ -87,18 +82,16 @@ nav a {
     transition: text-shadow 0.25s ease;
 }
 
-/* TEXT WRAPPER */
 nav a span {
     position: relative;
     display: inline-block;
     transition: transform 0.25s ease;
 }
 
-/* UNDERLINE (OFFSET UNDER FIRST LETTER) */
 nav a span::after {
     content: '';
     position: absolute;
-    left: 3px;                 /* ⬅️ underline starts slightly right */
+    left: 3px; /* nudged right a bit */
     bottom: -6px;
     width: 0%;
     height: 2px;
@@ -111,7 +104,6 @@ nav a:hover span::after {
     width: calc(100% - 6px);
 }
 
-/* VERTICAL SEPARATORS */
 nav a + a {
     padding-left: 30px;
 }
@@ -128,7 +120,6 @@ nav a + a::after {
     pointer-events: none;
 }
 
-/* HOVER */
 nav a:hover span {
     transform: scale(1.08);
 }
@@ -140,7 +131,6 @@ nav a:hover {
         0 0 45px rgba(0, 255, 102, 0.4);
 }
 
-/* ------------------ HERO ------------------ */
 .hero {
     height: 100vh;
     position: relative;
@@ -170,7 +160,6 @@ nav a:hover {
     100% { opacity: 0; }
 }
 
-/* ------------------ HERO TEXT ------------------ */
 .hero-text {
     position: absolute;
     top: 50%;
@@ -203,7 +192,6 @@ nav a:hover {
     font-size: 20px;
 }
 
-/* ------------------ CONTENT ------------------ */
 .section {
     padding: 100px 60px;
     max-width: 1200px;
@@ -222,7 +210,6 @@ nav a:hover {
     color: var(--accent);
 }
 
-/* ------------------ CONTACT ------------------ */
 .contact {
     background: linear-gradient(180deg, #050505, #020202);
     border-top: 1px solid rgba(255,255,255,0.08);
@@ -258,7 +245,6 @@ nav a:hover {
     margin-bottom: 10px;
 }
 
-/* ------------------ FOOTER ------------------ */
 footer {
     padding: 30px;
     text-align: center;
@@ -328,7 +314,7 @@ footer {
 </section>
 
 <footer>
-    © 2026 Carlenius AI — All Rights Reserved
+    © 2026 Carlenius AI - All Rights Reserved
 </footer>
 
 </body>

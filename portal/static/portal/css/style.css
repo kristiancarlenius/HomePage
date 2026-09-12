@@ -1,0 +1,122 @@
+/* same dark theme as the main site */
+:root {
+    --bg-main: #000000;
+    --bg-secondary: #0b0b0b;
+    --bg-tertiary: #1f1f1f;
+    --text-main: #0ead00;
+    --text-muted: #7fbf6e;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--text-main);
+}
+
+header.portal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+nav.portal-nav a {
+    margin-right: 18px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav.portal-nav a:hover {
+    color: #fff;
+}
+
+main.portal-main {
+    padding: 30px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-soft);
+}
+
+table.portal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table.portal-table th, table.portal-table td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--text-main);
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.secondary {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--text-main);
+}
+
+form p, form .field {
+    margin-bottom: 12px;
+}
+
+input, textarea, select {
+    background-color: #111;
+    color: var(--text-main);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+}
+
+.messages li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: var(--bg-tertiary);
+    border-left: 3px solid var(--text-main);
+}
+
+.tag-ours { color: #0ead00; }
+.tag-external { color: #7fbf6e; }

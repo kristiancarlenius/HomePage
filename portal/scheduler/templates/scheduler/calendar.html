@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Calendar - Carlenius AI Portal{% endblock %}
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+{% endblock %}
+{% block content %}
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <h1>Team Calendar</h1>
+    <a class="btn" href="{% url 'meeting_create' %}">New meeting</a>
+</div>
+<div id="calendar" class="card"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+        initialView: 'fourWeeks',
+        views: {
+            fourWeeks: { type: 'dayGrid', duration: { weeks: 4 }, buttonText: '4 weeks' }
+        },
+        contentHeight: 'auto',
+        headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
+        events: "{% url 'events_json' %}",
+        eventClick: function (info) {
+            if (info.event.url) {
+                info.jsEvent.preventDefault();
+                window.location.href = info.event.url;
+            }
+        },
+        eventDidMount: function (info) {
+            var attendees = info.event.extendedProps.attendees;
+            var comment = info.event.extendedProps.comment;
+            var tip = attendees ? ('Attendees: ' + attendees) : '';
+            if (comment) tip += (tip ? '\n' : '') + comment;
+            if (tip) info.el.setAttribute('title', tip);
+        }
+    });
+    calendar.render();
+});
+</script>
+{% endblock %}

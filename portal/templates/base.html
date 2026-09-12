@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Carlenius AI Portal{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'portal/css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <header class="portal-header">
+        <strong>Carlenius AI Portal</strong>
+        <nav class="portal-nav">
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'calendar' %}">Calendar</a>
+            <a href="{% url 'customer_list' %}">Customers</a>
+            <a href="{% url 'my_hours' %}">My Hours</a>
+            {% if user.is_staff %}<a href="{% url 'billing' %}">Billing</a>{% endif %}
+            <a href="{% url 'repo_list' %}">Repos</a>
+            <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
+        </nav>
+    </header>
+    {% endif %}
+    <main class="portal-main">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

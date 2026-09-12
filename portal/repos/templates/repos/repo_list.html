@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Repos{% endblock %}
+{% block content %}
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <h1>Repo Directory</h1>
+    <a class="btn" href="{% url 'repo_create' %}">Add repo</a>
+</div>
+<table class="portal-table">
+    <thead><tr><th>Name</th><th>Tag</th><th>Description</th><th>Added by</th><th></th></tr></thead>
+    <tbody>
+    {% for repo in repos %}
+        <tr>
+            <td><a href="{{ repo.url }}" target="_blank" rel="noopener">{{ repo.name }}</a></td>
+            <td class="tag-{{ repo.tag }}">{{ repo.get_tag_display }}</td>
+            <td>{{ repo.description|default:"-" }}</td>
+            <td>{{ repo.added_by|default:"-" }}</td>
+            <td><a href="{% url 'repo_edit' repo.pk %}">Edit</a></td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="5">No repos listed yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
