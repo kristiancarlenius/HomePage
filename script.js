@@ -62,7 +62,7 @@
             "services.04.title": "Dataflyt",
             "services.04.body": "Ryddig, automatisert dataflyt fra kilde til beslutning, bygget for å vokse med virksomheten i stedet for å bli et problem senere.",
             "about.title": "Om Carlenius AI",
-            "about.p1": "Carlenius AI er et programvarekonsulentselskap i toppsjiktet som spesialiserer seg på kunstig intelligens, automasjon og datadrevne systemer. Vi designer og bygger intelligente løsninger som effektiviserer arbeidsflyt, styrker beslutningstaking og reduserer arbeidsmengden betraktelig.",
+            "about.p1": "Carlenius AI er et programvarekonsulentselskap som spesialiserer seg på kunstig intelligens, automasjon og datadrevne systemer. Vi designer og bygger intelligente løsninger som effektiviserer arbeidsflyt, styrker beslutningstaking og reduserer arbeidsmengden betraktelig.",
             "about.p2": "Fra computer vision og prediktiv modellering til fullautomatiserte pipelines, hver løsning er skreddersydd for å gi virksomheten din et konkurransefortrinn.",
             "contact.title": "Kontakt",
             "contact.phone.label": "Telefon",

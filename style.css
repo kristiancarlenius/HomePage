@@ -23,7 +23,7 @@
 
     --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-    --header-h: 76px;
+    --header-h: 100px;
     --max-w: 1180px;
 }
 
@@ -165,14 +165,25 @@ body::before {
 }
 
 .site-header .container {
-    display: flex;
+    display: grid;
+    /* Equal outer tracks (not "auto") so the nav in the middle is truly
+       centered in the header, regardless of the logo and the actions
+       cluster being different widths. */
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    justify-content: space-between;
+    column-gap: 24px;
     width: 100%;
+    max-width: none;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.logo {
+    justify-self: start;
 }
 
 .logo img {
-    height: 40px;
+    height: 90px;
 }
 
 .logo-light {
@@ -187,10 +198,8 @@ html[data-theme="light"] .logo-light {
     display: block;
 }
 
-.nav-wrap {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+.site-nav {
+    justify-self: center;
     min-width: 0;
 }
 
@@ -207,7 +216,7 @@ html[data-theme="light"] .logo-light {
     align-items: center;
     gap: 6px;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -241,26 +250,32 @@ html[data-theme="light"] .logo-light {
 }
 
 .nav-login {
-    font-size: 12px !important;
-    color: var(--text-faint) !important;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    white-space: nowrap;
+    font-size: 12px;
+    color: var(--text-faint);
     border: 1px solid var(--border-strong);
-    padding: 8px 14px !important;
+    padding: 8px 14px;
     border-radius: 6px;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.nav-login::after {
-    display: none;
-}
-
-.nav-login:hover {
+.nav-login:hover,
+.nav-login:focus-visible {
     border-color: var(--accent-dim);
-    color: var(--accent) !important;
+    color: var(--accent);
 }
 
 .header-actions {
+    justify-self: end;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
 }
 
 .nav-utils {
@@ -693,17 +708,51 @@ footer p {
 /* ------------------ RESPONSIVE ------------------ */
 @media (max-width: 760px) {
     :root {
-        --header-h: 64px;
+        --header-h: 72px;
+    }
+
+    .logo img {
+        height: 40px;
+    }
+
+    .site-header .container {
+        padding-left: 18px;
+        padding-right: 18px;
+        column-gap: 8px;
+    }
+
+    .header-actions {
+        gap: 6px;
+    }
+
+    .icon-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    /* icon-only on mobile: the "EN"/"NO" label and chevron would blow the
+       header width out once Login sits permanently in this same row */
+    .lang-btn {
+        width: 34px;
+        padding: 0;
+    }
+
+    .lang-btn span,
+    .lang-btn .chevron {
+        display: none;
+    }
+
+    .nav-login {
+        padding: 6px 9px;
+        font-size: 10.5px;
     }
 
     .nav-toggle {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .nav-wrap {
-        gap: 10px;
+        width: 34px;
+        height: 34px;
     }
 
     .site-nav {
@@ -737,11 +786,6 @@ footer p {
     .nav-links a {
         padding: 14px 0;
         width: 100%;
-    }
-
-    .nav-login {
-        margin-top: 8px;
-        display: inline-block;
     }
 
     .hero-text {
