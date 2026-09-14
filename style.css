@@ -742,6 +742,12 @@ footer p {
         display: none;
     }
 
+    /* Top bar is already tight (theme + language + Login + hamburger);
+       GitHub is secondary and still reachable from the footer. */
+    .github-btn {
+        display: none;
+    }
+
     .nav-login {
         padding: 6px 9px;
         font-size: 10.5px;
