@@ -31,3 +31,34 @@ class MeetingPermissionTests(TestCase):
         self.client.login(username='bob', password='pw12345!')
         response = self.client.get(reverse('meeting_edit', args=[self.meeting.pk]))
         self.assertEqual(response.status_code, 403)
+
+
+class MeetingTimeFormatTests(TestCase):
+    def setUp(self):
+        self.alice = User.objects.create_user(username='alice', password='pw12345!')
+        self.client.login(username='alice', password='pw12345!')
+
+    def test_create_meeting_with_24h_time(self):
+        response = self.client.post(reverse('meeting_create'), {
+            'title': 'Late sync',
+            'start_0': '2026-10-13', 'start_1': '21:30',
+            'end_0': '2026-10-13', 'end_1': '23:59',
+        })
+        self.assertRedirects(response, reverse('calendar'))
+        meeting = Meeting.objects.get(title='Late sync')
+        self.assertEqual(timezone.localtime(meeting.start).strftime('%H:%M'), '21:30')
+
+    def test_edit_form_shows_24h_time(self):
+        start = timezone.make_aware(timezone.datetime(2026, 10, 13, 15, 0))
+        meeting = Meeting.objects.create(
+            title='Afternoon', start=start, end=start + timezone.timedelta(hours=1), created_by=self.alice
+        )
+        response = self.client.get(reverse('meeting_edit', args=[meeting.pk]))
+        self.assertContains(response, 'value="15:00"')
+        self.assertNotContains(response, 'p.m.')
+
+    def test_datetime_filter_renders_24h(self):
+        from django.template import Context, Template
+        dt = timezone.make_aware(timezone.datetime(2026, 10, 13, 18, 5))
+        out = Template('{{ dt }}|{{ dt|time }}').render(Context({'dt': dt}))
+        self.assertEqual(out, '2026-10-13 18:05|18:05')

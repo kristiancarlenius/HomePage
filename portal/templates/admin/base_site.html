@@ -1,0 +1,14 @@
+{% extends "admin/base_site.html" %}
+
+{% block extrahead %}{{ block.super }}
+<script>
+// the admin clock popup offers "6 a.m."/"Noon"; swap in 24h labels before it initialises on window load
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.DateTimeShortcuts) {
+        DateTimeShortcuts.clockHours.default_ = [
+            ['Now', -1], ['00:00', 0], ['06:00', 6], ['12:00', 12], ['18:00', 18]
+        ];
+    }
+});
+</script>
+{% endblock %}

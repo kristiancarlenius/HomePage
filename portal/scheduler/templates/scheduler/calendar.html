@@ -19,6 +19,11 @@ document.addEventListener('DOMContentLoaded', function () {
         contentHeight: 'auto',
         headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
         events: "{% url 'events_json' %}",
+        // built by hand: Intl with hour12:false can still print "24:00" for midnight
+        eventTimeFormat: function (arg) {
+            var pad = function (n) { return String(n).padStart(2, '0'); };
+            return pad(arg.date.hour) + ':' + pad(arg.date.minute);
+        },
         eventClick: function (info) {
             if (info.event.url) {
                 info.jsEvent.preventDefault();

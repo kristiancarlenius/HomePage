@@ -99,6 +99,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Oslo'
 USE_I18N = True
 USE_TZ = True
+FORMAT_MODULE_PATH = ['carlenius_portal.formats']
 
 # matches the /app/ prefix everything else uses
 STATIC_URL = '/app/static/'
