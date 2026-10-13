@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}All Hours{% endblock %}
+{% block content %}
+<h1>All Hours</h1>
+<form method="get" class="card">
+    <label>User
+        <select name="user">
+            <option value="">Everyone</option>
+            {% for u in users %}
+            <option value="{{ u.pk }}"{% if selected_user == u.pk|stringformat:"s" %} selected{% endif %}>{{ u.username }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>From <input type="date" name="start" value="{{ start }}"></label>
+    <label>To <input type="date" name="end" value="{{ end }}"></label>
+    <button class="btn" type="submit">Filter</button>
+</form>
+<p>Total: <strong>{{ total }}h</strong></p>
+<table class="portal-table">
+    <thead><tr><th>Date</th><th>User</th><th>Customer</th><th>Hours</th><th>Description</th><th></th></tr></thead>
+    <tbody>
+    {% for entry in entries %}
+        <tr>
+            <td>{{ entry.date|date:"Y-m-d" }}</td>
+            <td>{{ entry.user.username }}</td>
+            <td>{{ entry.customer|default:"-" }}</td>
+            <td>{{ entry.hours }}</td>
+            <td>{{ entry.description|default:"-" }}</td>
+            <td><a href="{% url 'entry_edit' entry.pk %}">Edit</a></td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="6">No entries match.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

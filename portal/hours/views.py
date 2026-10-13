@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.db.models import Sum
 from django.http import HttpResponse
+from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, redirect, render
 
 from accounts.decorators import staff_required
@@ -45,7 +46,7 @@ def entry_edit(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Entry updated.')
-            return redirect('my_hours')
+            return redirect(_back_to(request, entry))
     else:
         form = TimeEntryForm(instance=entry)
     return render(request, 'hours/entry_form.html', {'form': form, 'entry': entry})
@@ -59,8 +60,35 @@ def entry_delete(request, pk):
     if request.method == 'POST':
         entry.delete()
         messages.success(request, 'Entry deleted.')
-        return redirect('my_hours')
+        return redirect(_back_to(request, entry))
     return render(request, 'hours/entry_confirm_delete.html', {'entry': entry})
+
+
+def _back_to(request, entry):
+    # admins editing someone else's entry came from All Hours, so send them back there
+    return 'my_hours' if entry.user_id == request.user.id else 'all_hours'
+
+
+@staff_required
+def all_hours(request):
+    entries, start, end = _billing_queryset(request)
+    selected_user = request.GET.get('user', '')
+    if selected_user:
+        entries = entries.filter(user_id=selected_user)
+    total = entries.aggregate(total=Sum('hours'))['total'] or 0
+    users = get_user_model().objects.order_by('username')
+    return render(
+        request,
+        'hours/all_hours.html',
+        {
+            'entries': entries,
+            'total': total,
+            'users': users,
+            'selected_user': selected_user,
+            'start': start or '',
+            'end': end or '',
+        },
+    )
 
 
 def _billing_queryset(request):

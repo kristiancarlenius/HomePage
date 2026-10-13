@@ -39,3 +39,22 @@ class HoursPermissionTests(TestCase):
         self.client.login(username='kristian', password='pw12345!')
         response = self.client.get(reverse('billing'))
         self.assertEqual(response.status_code, 200)
+
+    def test_all_hours_blocked_for_non_admin(self):
+        self.client.login(username='alice', password='pw12345!')
+        response = self.client.get(reverse('all_hours'))
+        self.assertEqual(response.status_code, 403)
+
+    def test_all_hours_shows_everyones_entries(self):
+        TimeEntry.objects.create(user=self.bob, date='2026-01-02', hours=5)
+        self.client.login(username='kristian', password='pw12345!')
+        response = self.client.get(reverse('all_hours'))
+        self.assertContains(response, '2026-01-01')
+        self.assertContains(response, '2026-01-02')
+
+    def test_all_hours_filters_by_user(self):
+        TimeEntry.objects.create(user=self.bob, date='2026-01-02', hours=5)
+        self.client.login(username='kristian', password='pw12345!')
+        response = self.client.get(reverse('all_hours'), {'user': self.bob.pk})
+        self.assertNotContains(response, '2026-01-01')
+        self.assertContains(response, '2026-01-02')
